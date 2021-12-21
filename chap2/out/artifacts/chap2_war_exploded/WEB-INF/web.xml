@@ -3,12 +3,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    <servlet>
+   <!-- <servlet>
         <servlet-name>registe</servlet-name>
         <servlet-class>RegisteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>registe</servlet-name>
         <url-pattern>/reg</url-pattern>
+    </servlet-mapping>-->
+    <servlet>
+        <servlet-name>addMysql</servlet-name>
+        <servlet-class>add</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addMysql</servlet-name>
+        <url-pattern>/addsql</url-pattern>
     </servlet-mapping>
 </web-app>
