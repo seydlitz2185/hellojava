@@ -20,4 +20,13 @@
         <servlet-name>addMysql</servlet-name>
         <url-pattern>/addsql</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>selectMysql</servlet-name>
+        <servlet-class>select</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>selectMysql</servlet-name>
+        <url-pattern>/selectsql</url-pattern>
+    </servlet-mapping>
 </web-app>
