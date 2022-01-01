@@ -15,13 +15,14 @@ public class select extends HttpServlet{
         String account = request.getParameter("account");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        passwd psw = new passwd();
         PreparedStatement ps ;
         Connection connect;
         ResultSet rs;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             connect = DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/JDBCtest","root","m4aiak47rpk");
+                    "jdbc:mysql://127.0.0.1:3306/JDBCtest","root",psw.getPasswd());
             String insertSql = "SELECT * FROM register WHERE account = ?";
             ps = connect.prepareStatement(insertSql);
             ps.setString(1,account);

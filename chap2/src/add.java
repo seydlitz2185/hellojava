@@ -16,6 +16,7 @@ public class add extends HttpServlet {
         String gender = request.getParameter("gender");
         String[] hobbies = request.getParameterValues("hobby");
         String hobbiesToString = "null";
+        passwd psw = new passwd();
         if(hobbies!=null){
             for (String s: hobbies
             ) {
@@ -35,7 +36,7 @@ public class add extends HttpServlet {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             connect = DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/JDBCtest","root","m4aiak47rpk");
+                    "jdbc:mysql://127.0.0.1:3306/JDBCtest","root",psw.getPasswd());
 
             String insertSql = "INSERT INTO register (account,passwd,gender,hobbies) VALUES(?,?,?,?)";
             ps = connect.prepareStatement(insertSql);
