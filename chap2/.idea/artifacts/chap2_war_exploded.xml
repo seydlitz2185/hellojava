@@ -7,6 +7,13 @@
         <element id="directory" name="classes">
           <element id="module-output" name="chap2" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="module" name="mysql" module-name="chap2" />
+          <element id="library" level="application" name="Servlet" />
+          <element id="file-copy" path="/Library/apache-tomcat-10.0.12/bin/bootstrap.jar" />
+          <element id="file-copy" path="/Library/apache-tomcat-10.0.12/bin/tomcat-juli.jar" />
+          <element id="file-copy" path="/Library/apache-tomcat-10.0.12/bin/commons-daemon.jar" />
+        </element>
       </element>
     </root>
   </artifact>
