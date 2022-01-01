@@ -1,3 +1,5 @@
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="Bean.DateBean" %>
 <%--
   Created by IntelliJ IDEA.
   User: stevenyu
@@ -9,8 +11,29 @@
 <html>
   <head>
     <title>$Title$</title>
+    <jsp:useBean id="date" scope="application" class="Bean.DateBean"></jsp:useBean>
+    <div text-align="center">
+      <div id="clock">
+        <div id="time">
+          <jsp:getProperty name="date" property="dateTime"/>
+        </div>
+        <div id="week">
+          <jsp:getProperty property="week" name="date"/>
+        </div>
+      </div>
+    </div>
+    <meta http-equiv="Refresh" content="1"/>
   </head>
   <body>
-  $END$
+  <%!
+    String greeting ="你好，世界";
+  %>
+  <%
+    out.write(greeting+"<br/>");
+  %>
+  <%--
+    out.write(date.getDateTime()+' '+date.getWeek()+"<br/>");
+  --%>
+
   </body>
 </html>
