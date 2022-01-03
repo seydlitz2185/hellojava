@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="JavaActualCombat:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/JavaActualCombat_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="JavaActualCombat" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="module" name="mysql" module-name="JavaActualCombat" />
+          <element id="library" level="application" name="Servlet" />
+          <element id="file-copy" path="/Library/apache-tomcat-10.0.12/bin/bootstrap.jar" />
+          <element id="file-copy" path="/Library/apache-tomcat-10.0.12/bin/tomcat-juli.jar" />
+          <element id="file-copy" path="/Library/apache-tomcat-10.0.12/bin/commons-daemon.jar" />
+          <element id="library" level="application" name="jakarta-taglibs-standard-2.0" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="JavaActualCombat/web/Web" />
+    </root>
+  </artifact>
+</component>
