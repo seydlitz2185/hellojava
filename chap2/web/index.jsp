@@ -10,7 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>$Title$</title>
+    <title>JavaBean&Filter实例</title>
     <jsp:useBean id="date" scope="application" class="Bean.DateBean"></jsp:useBean>
     <div text-align="center">
       <div id="clock">
