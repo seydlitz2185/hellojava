@@ -29,3 +29,5 @@ hs_err_pid*
 #mysqlpasswd
 *passwd.java
 *JDBCtest
+*mybatis-config.xml
+
