@@ -1,3 +1,5 @@
+package Servlet;
+
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -8,7 +10,7 @@ import java.io.IOException;
 /**
  * @author stevenyu
  */
-@WebServlet(name = "select", value = "/select")
+@WebServlet(name = "Servlet.select", value = "/Servlet.select")
 public class select extends HttpServlet{
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

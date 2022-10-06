@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.simple.mapper.UserMapper">
+
+
+    <resultMap id="userMap" type="mybatis.simple.model.User">
+        <id property="id" column="id"/>
+        <result property="userName" column="username"/>
+        <result property="userEmail" column="email"/>
+        <result property="userPassword" column="Servlet.passwd"/>
+        <result property="userPhoneNum" column="phoneNum"/>
+    </resultMap>
+
+    <select id="findAll" resultType="mybatis.simple.model.User">
+        SELECT * from sys_user;
+    </select>
+
+   <select id="selectById" resultMap="userMap">
+        SELECT * from sys_user where id = #{id}
+   </select>
+
+</mapper>

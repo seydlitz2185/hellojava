@@ -23,6 +23,7 @@
 <table id="simple">
     <tr>
         <td class="header"><h4>添加</h4></td>
+        <td class="header"><h4>登陆</h4></td>
         <td class="header"><h4>查询</h4></td>
     </tr>
     <tr>
@@ -43,6 +44,13 @@
         <br/><br/>
 </form>
         </td>
+        <td class = "insert">
+            <form action="login" method="post">
+                账号：<input type="text" name="account"><br/><br/>
+                密码：<input type="text" name="passwd"><br/><br/>
+                <input type="submit" value="登陆">
+                <br/><br/>
+            </form>
         <td class="search">
     <form action="select" method="post">
     账号：<input type="text" name="account">

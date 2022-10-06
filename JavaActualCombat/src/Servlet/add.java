@@ -1,3 +1,5 @@
+package Servlet;
+
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -6,13 +8,13 @@ import java.io.PrintWriter;
 import java.sql.*;
 import java.io.IOException;
 
-@WebServlet(name = "add", value = "/add")
+@WebServlet(name = "Servlet.add", value = "/Servlet.add")
 public class add extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         /*从Request中读取请求*/
         String account = request.getParameter("account");
-        String passwd = request.getParameter("passwd");
+        String passwd = request.getParameter("Servlet.passwd");
         String gender = request.getParameter("gender");
         String[] hobbies = request.getParameterValues("hobby");
         String hobbiesToString = "null";
