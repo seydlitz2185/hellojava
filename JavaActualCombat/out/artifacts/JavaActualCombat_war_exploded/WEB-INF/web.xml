@@ -21,27 +21,8 @@
 
     <servlet-mapping>
         <servlet-name>registe</servlet-name>
-        <url-pattern>/reg</url-pattern>
+        <url-pattern>/regist</url-pattern>
     </servlet-mapping>
-
-    <servlet>
-        <servlet-name>addMysql</servlet-name>
-        <servlet-class>add</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>addMysql</servlet-name>
-        <url-pattern>/addsql</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>selectMysql</servlet-name>
-        <servlet-class>select</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>selectMysql</servlet-name>
-        <url-pattern>/selectsql</url-pattern>
-    </servlet-mapping>
-
     <servlet>
         <servlet-name>loginAuth</servlet-name>
         <servlet-class>LoginServlet</servlet-class>

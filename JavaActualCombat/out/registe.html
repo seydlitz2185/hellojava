@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <style>
+       #simple{
+           border: 2px solid;
+       }
+       .header{
+           border: 1px solid;
+           background:lavender;
+           text-align: center;
+       }
+       .insert,.search{
+           border: 1px solid;
+           background: aliceblue;
+           vertical-align: top;
+       }
+    </style>
+</head>
+<body>
+<table id="simple">
+    <tr>
+        <td class="header"><h4>添加</h4></td>
+        <td class="header"><h4>登陆</h4></td>
+        <td class="header"><h4>查询</h4></td>
+    </tr>
+    <tr>
+        <td class="insert">
+    <form action="add" method="post">
+    账号：<input type="text" name="account"><br/><br/>
+    密码：<input type="text" name="passwd"><br/><br/>
+    性别：
+        <input type="radio" name="gender" value="male" checked>男
+        <input type="radio" name="gender" value="female">女
+        <br/><br/>
+    关注：
+        <input type="checkbox" name="hobby" value="computer">计算机
+        <input type="checkbox" name="hobby" value="finance">金融
+        <input type="checkbox" name="hobby" value="language">外语
+        <br/><br/>
+        <input type="submit" value="注册">
+        <br/><br/>
+</form>
+        </td>
+        <td class = "insert">
+            <form action="login" method="post">
+                账号：<input type="text" name="account"><br/><br/>
+                密码：<input type="text" name="passwd"><br/><br/>
+                <input type="submit" value="登陆">
+                <br/><br/>
+            </form>
+        <td class="search">
+    <form action="select" method="post">
+    账号：<input type="text" name="account">
+        <br/><br/>
+
+    <input type="submit" value="查询">
+</form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

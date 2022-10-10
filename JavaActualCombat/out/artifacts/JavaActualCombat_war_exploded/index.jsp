@@ -37,7 +37,7 @@
   %>
   <c:set scope="page" var="age" value="20"/>
   <c:if  test="${age ge 18}">
-    你好,niao
+    jsp测试
   </c:if>
   <%--也可以直接使用jsp内置对象打印JavaBean时间（此out定义在Servlet文件里，但是它是全局的，jsp也可以调用）--%>
   <%--

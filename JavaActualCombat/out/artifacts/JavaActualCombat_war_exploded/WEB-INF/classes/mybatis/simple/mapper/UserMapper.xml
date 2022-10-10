@@ -22,4 +22,12 @@
         SELECT * from sys_user where id = #{id}
    </select>
 
+    <select id="selectByEmail" resultMap="userMap">
+        SELECT * from sys_user where email = #{userEmail}
+    </select>
+
+    <insert id="insertNewUser" >
+        INSERT INTO sys_user(id,username,email,passwd,phoneNum)
+        VALUES (#{id},#{userName},#{userEmail},#{userPassword},#{userPhoneNum})
+    </insert>
 </mapper>
