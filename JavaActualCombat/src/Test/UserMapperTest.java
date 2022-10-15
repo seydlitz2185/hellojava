@@ -46,7 +46,7 @@ public class UserMapperTest {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         try{
-            User user = userMapper.selectById(14119401);
+            User user = userMapper.selectById("14119401");
             System.out.println(user.toString());
 
         } finally {

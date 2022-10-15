@@ -9,7 +9,6 @@
     <resultMap id="userMap" type="mybatis.simple.model.User">
         <id property="id" column="id"/>
         <result property="userName" column="username"/>
-        <result property="userEmail" column="email"/>
         <result property="userPassword" column="passwd"/>
         <result property="userPhoneNum" column="phoneNum"/>
     </resultMap>
@@ -22,12 +21,10 @@
         SELECT * from sys_user where id = #{id}
    </select>
 
-    <select id="selectByEmail" resultMap="userMap">
-        SELECT * from sys_user where email = #{userEmail}
-    </select>
+
 
     <insert id="insertNewUser" >
-        INSERT INTO sys_user(id,username,email,passwd,phoneNum)
-        VALUES (#{id},#{userName},#{userEmail},#{userPassword},#{userPhoneNum})
+        INSERT INTO sys_user(id,username,passwd,phoneNum)
+        VALUES (#{id},#{userName},#{userPassword},#{userPhoneNum})
     </insert>
 </mapper>

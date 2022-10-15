@@ -56,5 +56,8 @@
          把过滤器映射到对应的URL上意味着过滤器作用于这个网页上-->
         <url-pattern>/index.jsp</url-pattern>
     </filter-mapping>
-
+    <error-page>
+        <error-code>404</error-code>
+        <location>/index.html</location>
+    </error-page>
 </web-app>

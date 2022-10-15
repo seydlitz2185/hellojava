@@ -5,6 +5,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import mybatis.simple.mapper.UserMapper;
 import mybatis.simple.model.User;
+import mybatis.simple.model.UserLogin;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -36,9 +37,8 @@ public class RegisteServlet extends HttpServlet {
         result = data.getString("UserRegist");
         data = JSON.parseObject(result);
         User user=  new User();
-        user.setId(Integer.parseInt(data.getString("id")));
+        user.setId(data.getString("id"));
         user.setUsername(data.getString("userName"));
-        user.setEmail(data.getString("userEmail"));
         user.setPassword(data.getString("userPassword"));
         user.setPhoneNum(data.getString("userPhoneNum"));
         /*用Response返回请求*/
@@ -51,28 +51,29 @@ public class RegisteServlet extends HttpServlet {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
-        /*
-        User userTestEmail = userMapper.selectByEmail(user.getEmail());
-        if(userTestEmail !=null) {
-            out.print("该邮箱已被用于注册，请切换一个邮箱");
-            return;
-        }
         User userTestId = userMapper.selectById(user.getId());
         if(userTestId != null){
             out.print("该学号已注册账户");
             return;
         }
-
-         */
         //try{
                 try {
                     int res = userMapper.insertNewUser(user);
                     if (res == 1) {
-                        out.print("注册成功");}
-                } catch (Exception e) {
-                        out.print("注册失败");
-                } finally {
+                        UserLogin success = new UserLogin();
+                        success.setMsg("注册成功");
+                        success.setAccount(user.getId());
+                        success.setName(user.getUserName());
+                        String json = JSON.toJSONString(success);
+                        out.print(json);
+                }else {
+                        UserLogin unsuccess = new UserLogin();
+                        unsuccess.setMsg("注册失败");
+                        String json = JSON.toJSONString(unsuccess);
+                        out.print(json);
+                } }finally {
                         sqlSession.commit();
+                        //sqlSession.rollback();
                         sqlSession.close();
                 }
 

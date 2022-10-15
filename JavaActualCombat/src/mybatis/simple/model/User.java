@@ -5,9 +5,8 @@ package mybatis.simple.model;
  */
 
 public class User {
-    private long id;
+    private String id;
     private String userName;
-    private String userEmail;
     private String userPassword;
     private String userPhoneNum;
 
@@ -19,14 +18,6 @@ public class User {
         this.userName = username;
     }
 
-    public String getEmail() {
-        return userEmail;
-    }
-
-    public void setEmail(String email) {
-        this.userEmail = email;
-    }
-
     public String getPhoneNum() {
         return userPhoneNum;
     }
@@ -35,11 +26,11 @@ public class User {
         this.userPhoneNum = phoneNum;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -58,7 +49,6 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", username='" + userName + '\'' +
-                ", email='" + userEmail + '\'' +
                 ", password='" + userPassword + '\'' +
                 ", phoneNum='" + userPhoneNum + '\'' +
                 '}';

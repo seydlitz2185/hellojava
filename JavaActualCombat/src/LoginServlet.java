@@ -7,9 +7,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import mybatis.simple.model.UserLogin;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -56,10 +58,22 @@ public class LoginServlet  extends HttpServlet {
             SqlSession sqlSession = sqlSessionFactory.openSession();
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
             try{
-                User user = userMapper.selectById(Long.parseLong(account));
+                User user = userMapper.selectById(account);
                 if(user.getPassword().equals(passwd)){
-                    out.print("登陆成功");
-                }else{ out.print("密码错误,登陆失败");}
+                    UserLogin success = new UserLogin();
+                    success.setMsg("登陆成功");
+                    String id=user.getId();
+                    String name=user.getUserName();
+                    success.setAccount(id);
+                    success.setName(name);
+                    String json = JSON.toJSONString(success);
+                    out.print(json);
+                }else{
+                    UserLogin unsuccess = new UserLogin();
+                    unsuccess.setMsg("登陆失败");
+                    String json = JSON.toJSONString(unsuccess);
+                    out.print(json);
+                }
             } finally {
                 sqlSession.close();
             }
