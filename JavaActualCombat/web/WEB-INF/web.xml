@@ -31,7 +31,86 @@
         <servlet-name>loginAuth</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+        <servlet-name>diningPush</servlet-name>
+        <servlet-class>DiningServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>diningPush</servlet-name>
+        <url-pattern>/dining</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>diningFetchOne</servlet-name>
+        <servlet-class>DiningFetchOneServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>diningFetchOne</servlet-name>
+        <url-pattern>/diningFetchOne</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>diningFetchPage</servlet-name>
+        <servlet-class>DiningFetchPageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>diningFetchPage</servlet-name>
+        <url-pattern>/diningFetchPage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>diningOrderServlet</servlet-name>
+        <servlet-class>DiningOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>diningOrderServlet</servlet-name>
+        <url-pattern>/diningOrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>diningFetchUser</servlet-name>
+        <servlet-class>DiningFetchUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>diningFetchUser</servlet-name>
+        <url-pattern>/diningFetchUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>diningFetchUserOrder</servlet-name>
+        <servlet-class>DiningFetchUserOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>diningFetchUserOrder</servlet-name>
+        <url-pattern>/diningFetchUserOrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>diningOrderFetchUser</servlet-name>
+        <servlet-class>DiningOrderFetchUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>diningOrderFetchUser</servlet-name>
+        <url-pattern>/diningOrderFetchUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>diningUserCancelUser</servlet-name>
+        <servlet-class>DiningUserCancelServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>diningUserCancelUser</servlet-name>
+        <url-pattern>/diningUserCancelServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>diningOrderFinishUser</servlet-name>
+        <servlet-class>DiningOrderFinishServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>diningOrderFinishUser</servlet-name>
+        <url-pattern>/diningOrderFinishServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>diningProxyPickCancelServlet</servlet-name>
+        <servlet-class>DiningProxyPickCancelServlet </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>diningProxyPickCancelServlet</servlet-name>
+        <url-pattern>/diningProxyPickCancelServlet </url-pattern>
+    </servlet-mapping>
 
     <!-- 过滤器声明 -->
     <filter>

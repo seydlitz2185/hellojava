@@ -1,4 +1,4 @@
 package mybatis.simple.mapper;
 
-public interface DinningMapper {
+public interface MarketMapper {
 }

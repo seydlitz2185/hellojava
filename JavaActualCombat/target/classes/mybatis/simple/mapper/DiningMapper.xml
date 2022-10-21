@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.simple.mapper.DiningMapper">
+    <resultMap id="diningMap" type="mybatis.simple.model.Dining">
+        <id property="diningId" column="dining_id"/>
+        <result property="diningUser" column="user_name"/>
+        <result property="diningUserId" column="user_id"/>
+        <result property="diningName" column="dining_name"/>
+        <result property="diningTime" column="dining_time"/>
+        <result property="diningPrice" column="dining_price"/>
+        <result property="diningContact" column="dining_contact"/>
+        <result property="diningTags" column="dining_tags"/>
+        <result property="diningInfo" column="dining_info"/>
+
+    </resultMap>
+    <resultMap id="diningOrderMap" type="mybatis.simple.model.DiningOrder">
+        <id property="diningId" column="dining_id"/>
+        <result property="hostUserId" column="host_user_id"/>
+        <result property="deliverUserId" column="deliver_user_id"/>
+        <result property="diningName" column="dining_name"/>
+        <result property="diningTime" column="dining_time"/>
+        <result property="diningPrice" column="dining_price"/>
+        <result property="diningContact" column="dining_contact"/>
+        <result property="diningTags" column="dining_tags"/>
+        <result property="diningInfo" column="dining_info"/>
+
+    </resultMap>
+
+    <insert id="insertNewDining"  useGeneratedKeys="true" keyProperty="diningId"  keyColumn="id">
+        INSERT INTO dining(user_name,user_id,dining_name,dining_time,dining_price,dining_contact,dining_tags,dining_info)
+        VALUES (#{diningUser},#{diningUserId},#{diningName},#{diningTime},#{diningPrice},#{diningContact},#{diningTags},#{diningInfo})
+        <selectKey keyProperty="diningId" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+
+    </insert>
+
+    <select id="selectOne"  resultMap="diningMap">
+        SELECT * from dining limit 1
+    </select>
+
+    <select id="selectRange" parameterType="int"  resultMap="diningMap">
+        SELECT * from dining limit #{start}, #{offset}
+    </select>
+    <select id="selectById" resultMap="diningMap">
+        SELECT * from dining where dining_id = #{id}
+    </select>
+    <select id="selectByOrderId" resultMap="diningOrderMap">
+        SELECT * from dining_orders where dining_id = #{id}
+    </select>
+    <select id="selectByUserId" resultMap="diningMap">
+        SELECT * from dining where user_id = #{userId} limit #{start}, #{offset}
+    </select>
+    <select id="selectByUserOrderId" resultMap="diningOrderMap">
+        SELECT * from dining_orders where host_user_id = #{userId} limit #{start}, #{offset}
+    </select>
+    <select id="selectByUserProxyPickId" resultMap="diningOrderMap">
+        SELECT * from dining_orders where deliver_user_id = #{userId} limit #{start}, #{offset}
+    </select>
+    <delete id="deleteById">
+        DELETE FROM dining WHERE dining_id = #{id}
+    </delete>
+    <delete id="deleteOrderById">
+        DELETE FROM dining_orders WHERE dining_id = #{id}
+    </delete>
+    <insert id="insertOrder" >
+        INSERT INTO dining_orders(dining_id,host_user_id,deliver_user_id,dining_name,dining_time,dining_price,dining_contact,dining_tags,dining_info)
+        VALUES (#{diningId},#{hostUserId},#{deliverUserId},#{diningName},#{diningTime},#{diningPrice},#{diningContact},#{diningTags},#{diningInfo})
+    </insert>
+
+</mapper>

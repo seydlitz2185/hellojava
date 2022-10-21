@@ -1,16 +1,20 @@
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import mybatis.simple.mapper.DiningMapper;
 import mybatis.simple.mapper.UserMapper;
+import mybatis.simple.model.Dining;
+import mybatis.simple.model.DiningOrder;
 import mybatis.simple.model.User;
 import mybatis.simple.model.UserLogin;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.springframework.dao.DataAccessException;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,12 +23,8 @@ import java.net.URLDecoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.ibatis.exceptions.PersistenceException;
-/**
- * @author stevenyu
- */
-@WebServlet(name = "RegisteServlet", value = "/RegisteServlet")
-public class RegisteServlet extends HttpServlet {
+@WebServlet(name = "DiningProxyPickCancelServlet", value = "/DiningProxyPickCancelServlet")
+public class DiningProxyPickCancelServlet  extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         /*从Request中读取请求*/
@@ -34,14 +34,8 @@ public class RegisteServlet extends HttpServlet {
         Matcher m = p.matcher(loginStr);
         String result = URLDecoder.decode(m.replaceAll(""),"utf-8");
         JSONObject data = JSON.parseObject(result);
-        result = data.getString("UserRegist");
-        data = JSON.parseObject(result);
-        User user=  new User();
-        user.setId(data.getString("id"));
-        user.setUsername(data.getString("userName"));
-        user.setPassword(data.getString("userPassword"));
-        user.setPhoneNum(data.getString("userPhoneNum"));
-        /*用Response返回请求*/
+        int diningId=Integer.parseInt(data.getString("diningId"));
+
         response.setContentType("text/html;charset=UTF-8");
         SqlSessionFactory sqlSessionFactory;
         PrintWriter out = response.getWriter();
@@ -50,42 +44,36 @@ public class RegisteServlet extends HttpServlet {
         reader.close();
         SqlSession sqlSession = sqlSessionFactory.openSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-
-        User userTestId = userMapper.selectById(user.getId());
-        if(userTestId != null){
-            out.print("该学号已注册账户");
-            return;
-        }
+        DiningMapper diningMapper = sqlSession.getMapper(DiningMapper.class);
         //try{
-                try {
-                    int res = userMapper.insertNewUser(user);
-                    if (res == 1) {
-                        UserLogin success = new UserLogin();
-                        success.setMsg("注册成功");
-                        success.setAccount(user.getId());
-                        success.setName(user.getUserName());
-                        success.setPhoneNum(user.getPhoneNum());
+        try {
+            DiningOrder diningOrder = diningMapper.selectByOrderId(diningId);
+            if (diningOrder != null) {
+                User hostUser = userMapper.selectById(diningOrder.getHostUserId());
+                if(hostUser != null) {
+                    Dining rollbackDining = new Dining(hostUser.getUserName(),diningOrder.getHostUserId(),diningOrder.getDiningName(),diningOrder.getDiningTime(),diningOrder.getDiningPrice(),diningOrder.getDiningContact(),diningOrder.getDiningTags(),diningOrder.getDiningInfo());
+                    int res = diningMapper.deleteOrderById(diningId);
+                    int res2 = diningMapper.insertNewDining(rollbackDining);
+                    if(res == 1 && res2 == 1){
+                        UserLogin success = new UserLogin("", "代取已取消", "", "");
                         String json = JSON.toJSONString(success);
                         out.print(json);
-                }else {
-                        UserLogin unsuccess = new UserLogin();
-                        unsuccess.setMsg("注册失败");
-                        String json = JSON.toJSONString(unsuccess);
-                        out.print(json);
-                } }finally {
-                        sqlSession.commit();
-                        //sqlSession.rollback();
-                        sqlSession.close();
+                    }
                 }
-
-        /**}catch (IOException ignore) {
-            ignore.printStackTrace();
-        }*/
+            }else{
+                UserLogin success = new UserLogin("", "代取取消失败", "", "");
+                String json = JSON.toJSONString(success);
+                out.print(json);
+            } }finally {
+            sqlSession.commit();
+            //sqlSession.rollback();
+            sqlSession.close();
+        }
     }
 
 
 
-        /*用Response返回请求*/
+    /*用Response返回请求*/
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
