@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.simple.mapper.ExpressMapper">
+    <resultMap id="expressMap" type="mybatis.simple.model.Express">
+        <id property="expressId" column="express_id"/>
+        <result property="expressUser" column="user_name"/>
+        <result property="expressUserId" column="user_id"/>
+        <result property="expressName" column="express_name"/>
+        <result property="expressCode" column="express_code"/>
+        <result property="expressTime" column="express_time"/>
+        <result property="expressPrice" column="express_price"/>
+        <result property="expressContact" column="express_contact"/>
+        <result property="expressInfo" column="express_info"/>
+
+    </resultMap>
+    <resultMap id="expressOrderMap" type="mybatis.simple.model.ExpressOrder">
+        <id property="expressId" column="express_id"/>
+        <result property="hostUserId" column="host_user_id"/>
+        <result property="deliverUserId" column="deliver_user_id"/>
+        <result property="expressName" column="express_name"/>
+        <result property="expressCode" column="express_code"/>
+        <result property="expressTime" column="express_time"/>
+        <result property="expressPrice" column="express_price"/>
+        <result property="expressContact" column="express_contact"/>
+        <result property="expressInfo" column="express_info"/>
+
+    </resultMap>
+
+    <insert id="insertNewExpress"  useGeneratedKeys="true" keyProperty="expressId"  keyColumn="id">
+        INSERT INTO express(user_name,user_id,express_name,express_code,express_time,express_price,express_contact,express_info)
+        VALUES (#{expressUser},#{expressUserId},#{expressName},#{expressCode},#{expressTime},#{expressPrice},#{expressContact},#{expressInfo})
+        <selectKey keyProperty="expressId" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+
+    </insert>
+
+    <select id="selectOne"  resultMap="expressMap">
+        SELECT * from express limit 1
+    </select>
+
+    <select id="selectRange" parameterType="int"  resultMap="expressMap">
+        SELECT * from express limit #{start}, #{offset}
+    </select>
+    <select id="selectById" resultMap="expressMap">
+        SELECT * from express where express_id = #{id}
+    </select>
+    <select id="selectByOrderId" resultMap="expressOrderMap">
+        SELECT * from express_orders where express_id = #{id}
+    </select>
+    <select id="selectByUserId" resultMap="expressMap">
+        SELECT * from express where user_id = #{userId} limit #{start}, #{offset}
+    </select>
+    <select id="selectByUserOrderId" resultMap="expressOrderMap">
+        SELECT * from express_orders where host_user_id = #{userId} limit #{start}, #{offset}
+    </select>
+    <select id="selectByUserProxyPickId" resultMap="expressOrderMap">
+        SELECT * from express_orders where deliver_user_id = #{userId} limit #{start}, #{offset}
+    </select>
+    <delete id="deleteById">
+        DELETE FROM express WHERE express_id = #{id}
+    </delete>
+    <delete id="deleteOrderById">
+        DELETE FROM express_orders WHERE express_id = #{id}
+    </delete>
+    <insert id="insertOrder" >
+        INSERT INTO express_orders(express_id,host_user_id,deliver_user_id,express_name,express_code,express_time,express_price,express_contact,express_tags,express_info)
+        VALUES (#{expressId},#{hostUserId},#{deliverUserId},#{expressName},#{expressCode},#{expressTime},#{expressPrice},#{expressContact},#{expressTags},#{expressInfo})
+    </insert>
+
+</mapper>

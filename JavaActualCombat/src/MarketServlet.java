@@ -1,0 +1,89 @@
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import mybatis.simple.mapper.MarketMapper;
+import mybatis.simple.model.Market;
+import mybatis.simple.model.UserLogin;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Reader;
+import java.net.URLDecoder;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+@WebServlet(name = "MarketServlet", value = "/MarketServlet")
+public class MarketServlet extends HttpServlet {
+    @Override
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        /*从Request中读取请求*/
+        String marketStr = ServletHelper.getRequestPayload(request);
+        String pattern = "(json=)";
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(marketStr);
+        String result = URLDecoder.decode(m.replaceAll(""),"utf-8");
+        JSONObject data = JSON.parseObject(result);
+        result = data.getString("market");
+        data = JSON.parseObject(result);
+        Market market=  new Market();
+        market.setMarketUser(data.getString("userName"));
+        market.setMarketUserId(data.getString("userId"));
+        market.setMarketTime(data.getString("time"));
+        market.setMarketPrice(data.getString("cost"));
+        market.setMarketContact(data.getString("contact"));
+        market.setMarketTags(data.getString("tags"));
+        market.setMarketInfo(data.getString("info"));
+        /*用Response返回请求*/
+        response.setContentType("text/html;charset=UTF-8");
+        SqlSessionFactory sqlSessionFactory;
+        PrintWriter out = response.getWriter();
+        Reader reader = Resources.getResourceAsReader("/mybatis/simple/mybatis/mybatis-config.xml");
+        sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+        reader.close();
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        MarketMapper marketMapper = sqlSession.getMapper(MarketMapper.class);
+
+        //try{
+        try {
+            int res = marketMapper.insertNewMarket(market);
+            if (res == 1) {
+                UserLogin success = new UserLogin();
+                success.setMsg("下单成功,单号为："+String.valueOf(market.getMarketId()));
+                success.setAccount(market.getMarketUser());
+                success.setName(market.getMarketUser());
+                String json = JSON.toJSONString(success);
+                out.print(json);
+            }else {
+
+            } }finally {
+            sqlSession.commit();
+            //sqlSession.rollback();
+            sqlSession.close();
+        }
+
+        /**}catch (IOException ignore) {
+         ignore.printStackTrace();
+         }*/
+    }
+
+
+
+    /*用Response返回请求*/
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+}

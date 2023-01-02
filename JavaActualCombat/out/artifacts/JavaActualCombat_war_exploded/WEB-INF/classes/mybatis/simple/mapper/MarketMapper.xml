@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.simple.mapper.MarketMapper">
+    <resultMap id="marketMap" type="mybatis.simple.model.Market">
+        <id property="marketId" column="market_id"/>
+        <result property="marketUser" column="user_name"/>
+        <result property="marketUserId" column="user_id"/>
+        <result property="marketTime" column="market_time"/>
+        <result property="marketPrice" column="market_price"/>
+        <result property="marketContact" column="market_contact"/>
+        <result property="marketTags" column="market_tags"/>
+        <result property="marketInfo" column="market_info"/>
+
+    </resultMap>
+    <resultMap id="marketOrderMap" type="mybatis.simple.model.MarketOrder">
+        <id property="marketId" column="market_id"/>
+        <result property="hostUserId" column="host_user_id"/>
+        <result property="deliverUserId" column="deliver_user_id"/>
+        <result property="marketTime" column="market_time"/>
+        <result property="marketPrice" column="market_price"/>
+        <result property="marketContact" column="market_contact"/>
+        <result property="marketTags" column="market_tags"/>
+        <result property="marketInfo" column="market_info"/>
+
+    </resultMap>
+
+    <insert id="insertNewMarket"  useGeneratedKeys="true" keyProperty="marketId"  keyColumn="id">
+        INSERT INTO market(user_name,user_id,market_time,market_price,market_contact,market_tags,market_info)
+        VALUES (#{marketUser},#{marketUserId},#{marketTime},#{marketPrice},#{marketContact},#{marketTags},#{marketInfo})
+        <selectKey keyProperty="marketId" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+
+    </insert>
+
+    <select id="selectOne"  resultMap="marketMap">
+        SELECT * from market limit 1
+    </select>
+
+    <select id="selectRange" parameterType="int"  resultMap="marketMap">
+        SELECT * from market limit #{start}, #{offset}
+    </select>
+    <select id="selectById" resultMap="marketMap">
+        SELECT * from market where market_id = #{id}
+    </select>
+    <select id="selectByOrderId" resultMap="marketOrderMap">
+        SELECT * from market_orders where market_id = #{id}
+    </select>
+    <select id="selectByUserId" resultMap="marketMap">
+        SELECT * from market where user_id = #{userId} limit #{start}, #{offset}
+    </select>
+    <select id="selectByUserOrderId" resultMap="marketOrderMap">
+        SELECT * from market_orders where host_user_id = #{userId} limit #{start}, #{offset}
+    </select>
+    <select id="selectByUserProxyPickId" resultMap="marketOrderMap">
+        SELECT * from market_orders where deliver_user_id = #{userId} limit #{start}, #{offset}
+    </select>
+    <delete id="deleteById">
+        DELETE FROM market WHERE market_id = #{id}
+    </delete>
+    <delete id="deleteOrderById">
+        DELETE FROM market_orders WHERE market_id = #{id}
+    </delete>
+    <insert id="insertOrder" >
+        INSERT INTO market_orders(market_id,host_user_id,deliver_user_id,market_time,market_price,market_contact,market_tags,market_info)
+        VALUES (#{marketId},#{hostUserId},#{deliverUserId},#{marketTime},#{marketPrice},#{marketContact},#{marketTags},#{marketInfo})
+    </insert>
+
+</mapper>

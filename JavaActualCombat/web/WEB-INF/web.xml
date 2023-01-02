@@ -39,14 +39,7 @@
         <servlet-name>diningPush</servlet-name>
         <url-pattern>/dining</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>diningFetchOne</servlet-name>
-        <servlet-class>DiningFetchOneServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>diningFetchOne</servlet-name>
-        <url-pattern>/diningFetchOne</url-pattern>
-    </servlet-mapping>
+
     <servlet>
         <servlet-name>diningFetchPage</servlet-name>
         <servlet-class>DiningFetchPageServlet</servlet-class>
@@ -110,6 +103,151 @@
     <servlet-mapping>
         <servlet-name>diningProxyPickCancelServlet</servlet-name>
         <url-pattern>/diningProxyPickCancelServlet </url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ExpressPush</servlet-name>
+        <servlet-class>ExpressServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExpressPush</servlet-name>
+        <url-pattern>/express</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ExpressFetchPage</servlet-name>
+        <servlet-class>ExpressFetchPageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExpressFetchPage</servlet-name>
+        <url-pattern>/expressFetchPage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ExpressOrderServlet</servlet-name>
+        <servlet-class>DiningOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExpressOrderServlet</servlet-name>
+        <url-pattern>/expressOrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ExpressFetchUser</servlet-name>
+        <servlet-class>ExpressFetchUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExpressFetchUser</servlet-name>
+        <url-pattern>/expressFetchUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ExpressFetchUserOrder</servlet-name>
+        <servlet-class>ExpressFetchUserOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExpressFetchUserOrder</servlet-name>
+        <url-pattern>/expressFetchUserOrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ExpressOrderFetchUser</servlet-name>
+        <servlet-class>ExpressOrderFetchUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExpressOrderFetchUser</servlet-name>
+        <url-pattern>/expressOrderFetchUserServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ExpressUserCancelUser</servlet-name>
+        <servlet-class>ExpressUserCancelServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExpressUserCancelUser</servlet-name>
+        <url-pattern>/expressUserCancelServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ExpressOrderFinishUser</servlet-name>
+        <servlet-class>ExpressOrderFinishServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExpressOrderFinishUser</servlet-name>
+        <url-pattern>/expressOrderFinishServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ExpressProxyPickCancelServlet</servlet-name>
+        <servlet-class>ExpressProxyPickCancelServlet </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExpressProxyPickCancelServlet</servlet-name>
+        <url-pattern>/expressProxyPickCancelServlet </url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>MarketPush</servlet-name>
+        <servlet-class>MarketServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MarketPush</servlet-name>
+        <url-pattern>/market</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>MarketFetchPage</servlet-name>
+        <servlet-class>MarketFetchPageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MarketFetchPage</servlet-name>
+        <url-pattern>/marketFetchPage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>MarketOrderServlet</servlet-name>
+        <servlet-class>MarketOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MarketOrderServlet</servlet-name>
+        <url-pattern>/marketOrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>MarketFetchUser</servlet-name>
+        <servlet-class>MarketFetchUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MarketFetchUser</servlet-name>
+        <url-pattern>/marketFetchUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>MarketFetchUserOrder</servlet-name>
+        <servlet-class>MarketFetchUserOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MarketFetchUserOrder</servlet-name>
+        <url-pattern>/marketFetchUserOrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>MarketOrderFetchUser</servlet-name>
+        <servlet-class>MarketOrderFetchUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MarketOrderFetchUser</servlet-name>
+        <url-pattern>/marketOrderFetchUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>MarketUserCancelUser</servlet-name>
+        <servlet-class>MarketUserCancelServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MarketUserCancelUser</servlet-name>
+        <url-pattern>/marketUserCancelServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>MarketOrderFinishUser</servlet-name>
+        <servlet-class>MarketOrderFinishServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MarketOrderFinishUser</servlet-name>
+        <url-pattern>/marketOrderFinishServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>MarketProxyPickCancelServlet</servlet-name>
+        <servlet-class>MarketProxyPickCancelServlet </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MarketProxyPickCancelServlet</servlet-name>
+        <url-pattern>/marketProxyPickCancelServlet </url-pattern>
     </servlet-mapping>
 
     <!-- 过滤器声明 -->

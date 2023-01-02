@@ -41,9 +41,9 @@ public class DiningGeneraterTest {
         String[] diningNames = {"南苑一食堂","南苑二食堂","南苑三食堂","南苑香樟树","教工食堂","北苑四食堂","北苑五食堂","北苑民族食堂"};
         String[] diningDishTags = {"黄焖鸡","掉渣饼","两荤一素","一荤一素","鱼粉","包子","烤肠","奶茶","炒饭","鸭血粉丝","烤盘饭","麻辣香锅","烤冷面"
         ,"三鲜烩饼","牛肉汤","韩式石锅饭","辛拉面","板烧鸡腿堡","双层吉士堡","麦辣鸡腿堡",};
-        String[] diningPreferencesTags = {"不要餐具","放宿舍门口","多加米饭","不要辣椒","多加辣椒","不要香菜","多加香菜","不要葱花","多加葱花","半份",};
+        String[] diningPreferencesTags = {"不要餐具","多加米饭","不要辣椒","多加辣椒","不要香菜","多加香菜","不要葱花","多加葱花","半份","加鸡蛋","加香肠","加鸡腿","加卤蛋"};
         String[] diningPrice = {"10","11","12","13","14","15","16","17","18","19","20",};
-        String diningInfo="无";
+        String diningInfo="南苑20舍4XX";
 
         String currTime = String.valueOf(System.currentTimeMillis());
         for (int i =0; i<200;i++){
